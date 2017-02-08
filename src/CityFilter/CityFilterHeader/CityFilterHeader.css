@@ -1,0 +1,14 @@
+.category-filter {
+  height: 50px;
+  width: 500px;
+  overflow: hidden;
+}
+
+.category-filter ul{
+  list-style-type: none;
+}
+
+.category-filter ul li{
+  decoration: none;
+  float: left;
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import CityFilterHeader from './CityFilterHeader.js';
-import CityFilterBar from './CityFilterBar.js';
-import CityFilterBody from './CityFilterBody.js';
+import CityFilterHeader from './CityFilterHeader/CityFilterHeader.js';
+import CityFilterBar from './CityFilterBar/CityFilterBar.js';
+import CityFilterBody from './CityFilterBody/CityFilterBody.js';
+import './CityFilter.css';
 
 class CityFilter extends Component {
   constructor(props) {

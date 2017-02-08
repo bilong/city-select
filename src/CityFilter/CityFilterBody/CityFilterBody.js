@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CityFilterBody.css'
 
 class CityFilterBody extends Component {
   constructor(props) {

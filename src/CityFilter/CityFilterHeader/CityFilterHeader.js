@@ -1,4 +1,19 @@
 import React, { Component } from 'react';
+import './CityFilterHeader.css'
+
+class CategoryItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const category = this.props.category;
+
+    return (
+      <li>{category.name}</li>
+    );
+  }
+}
 
 class CategoryFilter extends Component {
   constructor(props) {
@@ -6,22 +21,24 @@ class CategoryFilter extends Component {
   }
 
   render() {
-
+    let category = {"name": "全选"};
     let categories = [];
+    categories.push(<CategoryItem key={category.name} category={category} />);
+
     this.props.cities.filter.forEach((category) => {
-      categories.push(<li> {category.name} </li>);
+      categories.push(<CategoryItem key={category.name} category={category} />);
     });
     this.props.cities.list.forEach((category) => {
-      categories.push(<li> {category.name} </li>);
+      categories.push(<CategoryItem key={category.name} category={category} />);
     });
 
     return (
       <div className="category-filter">
-        <button> &lt; </button>
+        <a href="#"> &lt; </a>
         <ul>
           {categories}
         </ul>
-        <button> &gt; </button>
+        <a href="#"> &gt; </a>
       </div>
     );
   }

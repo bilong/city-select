@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CitySelectHeader from './CitySelectHeader.js';
-import CityFilter from './CityFilter.js';
+import CitySelectHeader from './CitySelectHeader/CitySelectHeader.js';
+import CityFilter from './CityFilter/CityFilter.js';
 import './CitySelect.css';
 
 class CitySelect extends Component {
