@@ -1,5 +1,5 @@
 {
-  "name": "cities-selection",
+  "name": "city-select",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
