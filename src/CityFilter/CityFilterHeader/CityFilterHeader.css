@@ -1,14 +1,79 @@
+.city-filter-header {
+  height: 38px;
+  width: 1200px;
+  border-bottom: solid 1px #aaa;
+}
+
+.city-filter-header::after {
+  clear: both;
+  content: '';
+}
+
+/* category-filter */
 .category-filter {
-  height: 50px;
-  width: 500px;
+  position: relative;
+  width: 620px;
+  padding: 11px 32px;
+  float: left;
+}
+
+.category-filter::after {
+  clear: both;
+  content: '';
+}
+
+.category-filter a{
+  cursor: pointer;
+  padding: 0.5em;
+  text-decoration: none;
+}
+
+.category-filter nav {
   overflow: hidden;
 }
 
-.category-filter ul{
-  list-style-type: none;
+.category-filter nav ul{
+  position: relative;
+  width: 1980px;
+  left: 0;
+  transition: left 1s;
 }
 
 .category-filter ul li{
-  decoration: none;
-  float: left;
+  display: inline-block;
+}
+
+a.category-prev, a.category-next {
+  position: absolute;
+  padding: 11px;
+  top: 0;
+}
+
+.category-prev {
+  left: 0;
+}
+.category-next {
+  right: 0;
+}
+
+/* search-bar */
+.search-bar {
+  padding: 5px;
+  float: right;
+}
+
+.selectedCount {
+  color: #42b3f4;
+}
+
+.searchInput {
+  height: 25px;
+  width: 120px;
+  background: transparent url('./search.png') no-repeat 5px center;
+  background-size: 16px;
+  margin-left: 15px;
+  padding: 0 10px;
+  padding-left: 30px;
+  border-radius: 4px;
+  border: solid 1px #888;
 }

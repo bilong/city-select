@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './CityFilterHeader.css'
+import './CityFilterHeader.css';
 
 class CategoryItem extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class CategoryItem extends Component {
     const category = this.props.category;
 
     return (
-      <li>{category.name}</li>
+      <li><a>{category.name}</a></li>
     );
   }
 }
@@ -18,6 +18,19 @@ class CategoryItem extends Component {
 class CategoryFilter extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    let ul = document.getElementById('categories');
+    let navLeft = parseInt(ul.style.left) || 0;
+    if (e.target.className === "category-prev") {
+      ul.style.left = navLeft <= -1500 ? ul.style.left : navLeft - 500 + "px";
+    } else {
+      ul.style.left = navLeft >= 0 ? ul.style.left : navLeft + 500 + "px";
+    }
   }
 
   render() {
@@ -34,11 +47,13 @@ class CategoryFilter extends Component {
 
     return (
       <div className="category-filter">
-        <a href="#"> &lt; </a>
-        <ul>
-          {categories}
-        </ul>
-        <a href="#"> &gt; </a>
+        <nav>
+          <ul id="categories">
+            {categories}
+          </ul>
+        </nav>
+        <a className="category-prev" onClick={this.handleClick} href="#"> &lt; </a>
+        <a className="category-next" onClick={this.handleClick} href="#"> &gt; </a>
       </div>
     );
   }
@@ -55,10 +70,10 @@ class SearchBar extends Component {
     return (
       <div className="search-bar">
         <span>
-          Already choose: {this.props.selectedCount}ge
+          当前选中: <span className="selectedCount">{this.props.selectedCount}</span>个
         </span>
         <span>
-          <input type="text" value={this.props.searchText}/>
+          <input className="searchInput" type="text" value={this.props.searchText}/>
         </span>
       </div>
     );

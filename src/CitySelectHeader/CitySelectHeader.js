@@ -39,7 +39,7 @@ class CitySelectHeader extends Component {
 
     return (
       <div className="city-select-hearder">
-        <span>省份/城市：</span>
+        <span>省份\城市：</span>
         <span>
           <CitySelectRadio select={!select} text={"不限"} onChange={this.onChange} />
           <CitySelectRadio select={select} text={"自定义"} onChange={this.onChange} />
