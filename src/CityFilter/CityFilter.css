@@ -3,7 +3,7 @@
   width: 1200px;
   margin: 5px;
   margin-top: 15px;
-  padding: 5px;
+  padding: 15px;
   border-radius: 4px;
   border: solid 1px #aaa;
 }
@@ -18,7 +18,7 @@
   text-decoration: none;
 }
 
-.city-filter ul li a.active{
+.city-filter a.active{
   color: #42b3f4;
 }
 

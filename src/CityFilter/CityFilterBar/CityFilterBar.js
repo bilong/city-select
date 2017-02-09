@@ -47,8 +47,8 @@ class ToggleFilter extends Component {
     return (
       <div className="toggle-filter">
         <ul>
-          <li><a>choose all</a></li>
-          <li><a>inverse all</a></li>
+          <li><a>全选当前</a></li>
+          <li><a>清空当前</a></li>
         </ul>
       </div>
     );
@@ -64,7 +64,7 @@ class CityFilterBar extends Component {
 
     return (
       <div className="city-filter-bar">
-        <LetterFilter letter={this.props.letter}/>
+        <LetterFilter letter={this.props.currentLetter}/>
         <ToggleFilter toggle={this.props.toggle}/>
       </div>
     );

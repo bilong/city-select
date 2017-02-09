@@ -4,13 +4,18 @@ import './CityFilterHeader.css';
 class CategoryItem extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.onClick(this.props.category);
   }
 
   render() {
-    const category = this.props.category;
-
     return (
-      <li><a>{category.name}</a></li>
+      <li><a className={this.props.className} onClick={this.handleClick}>{this.props.category}</a></li>
     );
   }
 }
@@ -20,6 +25,11 @@ class CategoryFilter extends Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  handleFilter(category) {
+    this.props.onCategoryFilter(category);
   }
 
   handleClick(e) {
@@ -34,15 +44,11 @@ class CategoryFilter extends Component {
   }
 
   render() {
-    let category = {"name": "全选"};
+    const currentCategory = this.props.currentCategory;
     let categories = [];
-    categories.push(<CategoryItem key={category.name} category={category} />);
-
-    this.props.cities.filter.forEach((category) => {
-      categories.push(<CategoryItem key={category.name} category={category} />);
-    });
-    this.props.cities.list.forEach((category) => {
-      categories.push(<CategoryItem key={category.name} category={category} />);
+    this.props.categories.forEach((category) => {
+      let className = category === currentCategory ? "active" : "";
+      categories.push(<CategoryItem key={category} onClick={this.handleFilter} category={category} className={className}/>);
     });
 
     return (
@@ -52,8 +58,8 @@ class CategoryFilter extends Component {
             {categories}
           </ul>
         </nav>
-        <a className="category-prev" onClick={this.handleClick} href="#"> &lt; </a>
-        <a className="category-next" onClick={this.handleClick} href="#"> &gt; </a>
+        <a className="category-prev" onClick={this.handleClick}> &lt; </a>
+        <a className="category-next" onClick={this.handleClick}> &gt; </a>
       </div>
     );
   }
@@ -70,7 +76,7 @@ class SearchBar extends Component {
     return (
       <div className="search-bar">
         <span>
-          当前选中: <span className="selectedCount">{this.props.selectedCount}</span>个
+          已选中: <span className="selectedCount">{this.props.selectedCount}</span>个
         </span>
         <span>
           <input className="searchInput" type="text" value={this.props.searchText}/>
@@ -84,14 +90,18 @@ class SearchBar extends Component {
 class CityFilterHeader extends Component {
   constructor(props) {
     super(props);
+
+    this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+  }
+
+  handleCategoryFilter(category) {
+    this.props.onCategoryFilter(category);
   }
 
   render() {
-    const cities = this.props.cities;
-    console.log(this.props.selectedCount);
     return (
       <div className="city-filter-header">
-        <CategoryFilter cities={cities}/>
+        <CategoryFilter onCategoryFilter={this.handleCategoryFilter} categories={this.props.categories} currentCategory={this.props.currentCategory}/>
         <SearchBar selectedCount={this.props.selectedCount} searchText={this.props.searchText}/>
       </div>
     );

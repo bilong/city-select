@@ -8,11 +8,28 @@ class CityFilter extends Component {
   constructor(props) {
     super(props);
 
+    this.categories = ["全选"];
+    props.cities.filter.forEach((category) => {
+      this.categories.push(category.name);
+    });
+    props.cities.list.forEach((category) => {
+      this.categories.push(category.name);
+    });
+
+    this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+
     this.state = {
+      currentCategory: "全选",
       searchText: "",
-      letter: "All",
+      currentLetter: "All",
       toggle: false
     };
+  }
+
+  handleCategoryFilter(category) {
+    this.setState({
+      currentCategory: category
+    });
   }
 
   render() {
@@ -25,8 +42,8 @@ class CityFilter extends Component {
     return (
       <div className="city-filter">
         <div className="arrow"></div>
-        <CityFilterHeader cities={cities} selectedCount={filteredCities.length} searchText={this.state.searchText}/>
-        <CityFilterBar letter={this.state.letter} toggle={this.state.toggle}/>
+        <CityFilterHeader onCategoryFilter={this.handleCategoryFilter} categories={this.categories} selectedCount={filteredCities.length} currentCategory={this.state.currentCategory} searchText={this.state.searchText}/>
+        <CityFilterBar currentLetter={this.state.currentLetter} toggle={this.state.toggle}/>
         <CityFilterBody cities={filteredCities}/>
       </div>
     );

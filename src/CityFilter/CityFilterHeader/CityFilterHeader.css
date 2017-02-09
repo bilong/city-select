@@ -15,6 +15,7 @@
   width: 620px;
   padding: 11px 32px;
   float: left;
+  color: #99abbf;
 }
 
 .category-filter::after {
@@ -33,7 +34,7 @@
   transition: left 1s;
 }
 
-a.category-prev, a.category-next {
+.city-filter-header a.category-prev, .city-filter-header a.category-next {
   position: absolute;
   margin: 11px;
   top: 0;
