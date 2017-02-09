@@ -22,30 +22,20 @@
   content: '';
 }
 
-.category-filter a{
-  cursor: pointer;
-  padding: 0.5em;
-  text-decoration: none;
-}
-
 .category-filter nav {
   overflow: hidden;
 }
 
-.category-filter nav ul{
+.category-filter nav ul {
   position: relative;
   width: 1980px;
   left: 0;
   transition: left 1s;
 }
 
-.category-filter ul li{
-  display: inline-block;
-}
-
 a.category-prev, a.category-next {
   position: absolute;
-  padding: 11px;
+  margin: 11px;
   top: 0;
 }
 

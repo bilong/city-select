@@ -27,9 +27,9 @@ class CategoryFilter extends Component {
     let ul = document.getElementById('categories');
     let navLeft = parseInt(ul.style.left) || 0;
     if (e.target.className === "category-prev") {
-      ul.style.left = navLeft <= -1500 ? ul.style.left : navLeft - 500 + "px";
-    } else {
       ul.style.left = navLeft >= 0 ? ul.style.left : navLeft + 500 + "px";
+    } else {
+      ul.style.left = navLeft <= -1500 ? ul.style.left : navLeft - 500 + "px";
     }
   }
 

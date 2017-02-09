@@ -1,0 +1,14 @@
+.city-filter-body {
+  height: 300px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.city-filter-body ul li {
+  margin: 0.3em;
+  padding: 5px 0;
+}
+
+div.rc-tooltip-inner {
+  min-height: 0;
+}

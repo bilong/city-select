@@ -18,12 +18,13 @@ class CityFilter extends Component {
   render() {
     const cities = this.props.cities;
 
-    let filteredCities = cities.list.filter((city) => {
+    let filteredCities = cities.list.filter((province) => {
       return true;
     });
 
     return (
       <div className="city-filter">
+        <div className="arrow"></div>
         <CityFilterHeader cities={cities} selectedCount={filteredCities.length} searchText={this.state.searchText}/>
         <CityFilterBar letter={this.state.letter} toggle={this.state.toggle}/>
         <CityFilterBody cities={filteredCities}/>

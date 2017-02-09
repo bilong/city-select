@@ -1,0 +1,16 @@
+.city-filter-bar {
+  height: 16px;
+  width: auto;
+  padding: 18px;
+}
+
+/* letter-filter */
+.letter-filter {
+  float: left;
+}
+
+/* toggle-filter */
+.toggle-filter {
+  float: right;
+  color: #42b3f4;
+}
