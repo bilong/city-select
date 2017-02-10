@@ -34,7 +34,7 @@ class CategoryFilter extends Component {
 
   handleClick(e) {
     e.preventDefault();
-    let ul = document.getElementById('categories');
+    let ul = this.ul;
     let navLeft = parseInt(ul.style.left) || 0;
     if (e.target.className === "category-prev") {
       ul.style.left = navLeft >= 0 ? ul.style.left : navLeft + 500 + "px";
@@ -54,7 +54,7 @@ class CategoryFilter extends Component {
     return (
       <div className="category-filter">
         <nav>
-          <ul id="categories">
+          <ul ref={(ul) => { this.ul = ul; }}>
             {categories}
           </ul>
         </nav>
@@ -72,7 +72,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log(this.props.selectedCount);
     return (
       <div className="search-bar">
         <span>

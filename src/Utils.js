@@ -66,6 +66,25 @@ class Utils {
     return result;
   }
 
+  static selectAll(select, selectedCities, filteredCities) {
+    if (select) {
+      filteredCities.forEach((province) => {
+        province.cities.forEach((city) => {
+          selectedCities.push(city.id);
+        });
+      });
+    } else {
+      filteredCities.forEach((province) => {
+        province.cities.forEach((city) => {
+          selectedCities.splice(selectedCities.indexOf(city.id), 1);
+        });
+      });
+    }
+    return selectedCities;
+  }
+
+  //static walkCities(list, callback)
+
 }
 
 export default Utils;

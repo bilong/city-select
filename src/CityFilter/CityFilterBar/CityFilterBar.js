@@ -54,6 +54,19 @@ class LetterFilter extends Component {
 class ToggleFilter extends Component {
   constructor(props) {
     super(props);
+
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  handleSelect(e) {
+    e.preventDefault();
+    this.props.onClick(true);
+  }
+
+  handleCancel(e) {
+    e.preventDefault();
+    this.props.onClick(false);
   }
 
   render() {
@@ -61,8 +74,8 @@ class ToggleFilter extends Component {
     return (
       <div className="toggle-filter">
         <ul>
-          <li><a>全选当前</a></li>
-          <li><a>清空当前</a></li>
+          <li><a key="true" onClick={this.handleSelect}>全选当前</a></li>
+          <li><a key="false" onClick={this.handleCancel}>清空当前</a></li>
         </ul>
       </div>
     );
@@ -74,10 +87,15 @@ class CityFilterBar extends Component {
     super(props);
 
     this.handleLetterFilter = this.handleLetterFilter.bind(this);
+    this.handleSelectFilteredCities = this.handleSelectFilteredCities.bind(this);
   }
 
   handleLetterFilter(letter) {
     this.props.onLetterFilter(letter);
+  }
+
+  handleSelectFilteredCities(select) {
+    this.props.onSelectFilteredCities(select);
   }
 
   render() {
@@ -85,7 +103,7 @@ class CityFilterBar extends Component {
     return (
       <div className="city-filter-bar">
         <LetterFilter onLetterFilter={this.handleLetterFilter} letters={this.props.letters} currentLetter={this.props.currentLetter}/>
-        <ToggleFilter toggle={this.props.toggle}/>
+        <ToggleFilter onClick={this.handleSelectFilteredCities}/>
       </div>
     );
   }

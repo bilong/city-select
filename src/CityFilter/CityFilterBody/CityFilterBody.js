@@ -6,12 +6,27 @@ import './CityFilterBody.css'
 class FilteredCityItem extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+
+    let select = this.props.className !== "active";
+    this.props.onSelect(this.props.city.id, select);
   }
 
   render() {
 
     return (
-      <li><Tooltip placement="bottom" overlay={<span>{this.props.province}</span>}><a>{this.props.city.name}</a></Tooltip></li>
+      <li>
+        <Tooltip placement="bottom" overlay={<span>{this.props.province}</span>}>
+          <a onClick={this.handleClick} className={this.props.className}>
+            {this.props.city.name}
+          </a>
+        </Tooltip>
+      </li>
     );
   }
 }
@@ -19,6 +34,12 @@ class FilteredCityItem extends Component {
 class CityFilterBody extends Component {
   constructor(props) {
     super(props);
+
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleSelect(cityId, select) {
+    this.props.onSelect(cityId, select);
   }
 
   render() {
@@ -26,7 +47,8 @@ class CityFilterBody extends Component {
     let filteredCities = [];
     this.props.filteredCities.forEach((province) => {
       province.cities.forEach((city) => {
-        filteredCities.push(<FilteredCityItem key={city.name} city={city} province={province.name}/>);
+        let className = this.props.selectedCities.indexOf(city.id) > -1 ? "active" : "";
+        filteredCities.push(<FilteredCityItem key={city.name} onSelect={this.handleSelect} className={className} city={city} province={province.name}/>);
       });
     });
 
