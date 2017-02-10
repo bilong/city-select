@@ -24,7 +24,7 @@ class CityFilterBody extends Component {
   render() {
 
     let filteredCities = [];
-    this.props.cities.forEach((province) => {
+    this.props.filteredCities.forEach((province) => {
       province.cities.forEach((city) => {
         filteredCities.push(<FilteredCityItem key={city.name} city={city} province={province.name}/>);
       });

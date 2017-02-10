@@ -5,12 +5,19 @@ import './CityFilterBar.css'
 class LetterItem extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.onClick(this.props.letter);
   }
 
   render() {
 
     return (
-      <li><a>{this.props.letter}</a></li>
+      <li><a className={this.props.className} onClick={this.handleClick}>{this.props.letter}</a></li>
     );
   }
 }
@@ -18,13 +25,20 @@ class LetterItem extends Component {
 class LetterFilter extends Component {
   constructor(props) {
     super(props);
+
+    this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  handleFilter(letter) {
+    this.props.onLetterFilter(letter);
   }
 
   render() {
-
+    const currentLetter = this.props.currentLetter;
     let letters = [];
-    ["All", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"].forEach((letter) => {
-      letters.push(<LetterItem key={letter} letter={letter}/>);
+    this.props.letters.forEach((letter) => {
+      let className = letter === currentLetter ? "active" : "";
+      letters.push(<LetterItem key={letter} onClick={this.handleFilter} className={className} letter={letter}/>);
     });
 
     return (
@@ -58,13 +72,19 @@ class ToggleFilter extends Component {
 class CityFilterBar extends Component {
   constructor(props) {
     super(props);
+
+    this.handleLetterFilter = this.handleLetterFilter.bind(this);
+  }
+
+  handleLetterFilter(letter) {
+    this.props.onLetterFilter(letter);
   }
 
   render() {
 
     return (
       <div className="city-filter-bar">
-        <LetterFilter letter={this.props.currentLetter}/>
+        <LetterFilter onLetterFilter={this.handleLetterFilter} letters={this.props.letters} currentLetter={this.props.currentLetter}/>
         <ToggleFilter toggle={this.props.toggle}/>
       </div>
     );
