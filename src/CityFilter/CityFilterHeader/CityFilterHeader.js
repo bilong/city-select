@@ -15,7 +15,11 @@ class CategoryItem extends Component {
 
   render() {
     return (
-      <li><a className={this.props.className} onClick={this.handleClick}>{this.props.category}</a></li>
+      <li>
+        <a className={this.props.className} onClick={this.handleClick}>
+          {this.props.category}
+        </a>
+      </li>
     );
   }
 }
@@ -29,7 +33,7 @@ class CategoryFilter extends Component {
   }
 
   handleFilter(category) {
-    this.props.onCategoryFilter(category);
+    this.props.onCategoryChange(category);
   }
 
   handleClick(e) {
@@ -45,6 +49,9 @@ class CategoryFilter extends Component {
 
   render() {
     const currentCategory = this.props.currentCategory;
+    if (currentCategory === "全选" && this.ul) {
+      this.ul.style.left = "0";
+    }
     let categories = [];
     this.props.categories.forEach((category) => {
       let className = category === currentCategory ? "active" : "";
@@ -69,6 +76,12 @@ class CategoryFilter extends Component {
 class SearchBar extends Component {
   constructor(props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.props.onUserInput(this.searchTextInput.value);
   }
 
   render() {
@@ -78,30 +91,48 @@ class SearchBar extends Component {
           已选中: <span className="selectedCount">{this.props.selectedCount}</span>个
         </span>
         <span>
-          <input className="searchInput" type="text" value={this.props.searchText}/>
+          <input
+            className="searchInput"
+            type="text"
+            ref={(input) => this.searchTextInput = input}
+            onChange={this.handleChange}
+            value={this.props.searchText}
+          />
         </span>
       </div>
     );
   }
-
 }
 
 class CityFilterHeader extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
-  handleCategoryFilter(category) {
-    this.props.onCategoryFilter(category);
+  handleCategoryChange(category) {
+    this.props.onCategoryChange(category);
+  }
+
+  handleUserInput(searchText) {
+    this.props.onUserInput(searchText);
   }
 
   render() {
     return (
       <div className="city-filter-header">
-        <CategoryFilter onCategoryFilter={this.handleCategoryFilter} categories={this.props.categories} currentCategory={this.props.currentCategory}/>
-        <SearchBar selectedCount={this.props.selectedCount} searchText={this.props.searchText}/>
+        <CategoryFilter
+          onCategoryChange={this.handleCategoryChange}
+          categories={this.props.categories}
+          currentCategory={this.props.currentCategory}
+        />
+        <SearchBar
+          onUserInput={this.handleUserInput}
+          selectedCount={this.props.selectedCount}
+          searchText={this.props.searchText}
+        />
       </div>
     );
   }

@@ -17,7 +17,11 @@ class LetterItem extends Component {
   render() {
 
     return (
-      <li><a className={this.props.className} onClick={this.handleClick}>{this.props.letter}</a></li>
+      <li>
+        <a className={this.props.className} onClick={this.handleClick}>
+          {this.props.letter}
+        </a>
+      </li>
     );
   }
 }
@@ -30,7 +34,7 @@ class LetterFilter extends Component {
   }
 
   handleFilter(letter) {
-    this.props.onLetterFilter(letter);
+    this.props.onLetterChange(letter);
   }
 
   render() {
@@ -56,7 +60,7 @@ class ToggleFilter extends Component {
     super(props);
 
     this.handleSelect = this.handleSelect.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleSelect(e) {
@@ -64,7 +68,7 @@ class ToggleFilter extends Component {
     this.props.onClick(true);
   }
 
-  handleCancel(e) {
+  handleClear(e) {
     e.preventDefault();
     this.props.onClick(false);
   }
@@ -75,7 +79,7 @@ class ToggleFilter extends Component {
       <div className="toggle-filter">
         <ul>
           <li><a key="true" onClick={this.handleSelect}>全选当前</a></li>
-          <li><a key="false" onClick={this.handleCancel}>清空当前</a></li>
+          <li><a key="false" onClick={this.handleClear}>清空当前</a></li>
         </ul>
       </div>
     );
@@ -86,24 +90,28 @@ class CityFilterBar extends Component {
   constructor(props) {
     super(props);
 
-    this.handleLetterFilter = this.handleLetterFilter.bind(this);
-    this.handleSelectFilteredCities = this.handleSelectFilteredCities.bind(this);
+    this.handleLetterChange = this.handleLetterChange.bind(this);
+    this.handleToggleSelect = this.handleToggleSelect.bind(this);
   }
 
-  handleLetterFilter(letter) {
-    this.props.onLetterFilter(letter);
+  handleLetterChange(letter) {
+    this.props.onLetterChange(letter);
   }
 
-  handleSelectFilteredCities(select) {
-    this.props.onSelectFilteredCities(select);
+  handleToggleSelect(select) {
+    this.props.onToggleSelect(select);
   }
 
   render() {
 
     return (
       <div className="city-filter-bar">
-        <LetterFilter onLetterFilter={this.handleLetterFilter} letters={this.props.letters} currentLetter={this.props.currentLetter}/>
-        <ToggleFilter onClick={this.handleSelectFilteredCities}/>
+        <LetterFilter
+          onLetterChange={this.handleLetterChange}
+          letters={this.props.letters}
+          currentLetter={this.props.currentLetter}
+        />
+        <ToggleFilter onClick={this.handleToggleSelect}/>
       </div>
     );
   }
