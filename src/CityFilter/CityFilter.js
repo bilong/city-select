@@ -9,7 +9,7 @@ class CityFilter extends Component {
   constructor(props) {
     super(props);
 
-    this.filterModel = new FilterModel(props.cities);
+    this.filterModel = new FilterModel(props.data);
 
     this.handleSelect = this.handleSelect.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
@@ -52,6 +52,7 @@ class CityFilter extends Component {
   handleSelect(cityId, select) {
     let selectedCities = this.state.selectedCities;
     select ? selectedCities.push(cityId) : selectedCities.splice(selectedCities.indexOf(cityId), 1);
+    this.props.onResult(selectedCities);
     this.setState({
       selectedCities: selectedCities
     });
@@ -59,13 +60,14 @@ class CityFilter extends Component {
 
   handleToggleSelect(toggle) {
     let selectedCities = this.filterModel.onToggleSelect(toggle, this.state.selectedCities);
+    this.props.onResult(selectedCities);
     this.setState({
       selectedCities: selectedCities
     });
   }
 
   render() {
-
+    
     let letters = this.filterModel.letters;
     let categories = this.filterModel.categories;
     let filteredCities = this.filterModel.filteredCities;

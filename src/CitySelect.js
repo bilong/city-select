@@ -6,26 +6,31 @@ import './CitySelect.css';
 class CitySelect extends Component {
   constructor(props) {
     super(props);
+    this.handleResult = this.handleResult.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.state = {
       select: true
     };
   }
 
+  handleResult(result) {
+    this.props.onResult(result);
+  }
+
   handleSelectChange(value) {
+    this.onResult([]);
     this.setState({
       select: value
     });
   }
 
   render() {
-    const cities = this.props.cities;
     const select = this.state.select;
 
     return (
       <div className="city-select">
         <CitySelectHeader select={select} onChange={this.handleSelectChange} />
-        {select && <CityFilter cities={cities} />}
+        {select && <CityFilter onResult={this.handleResult} data={this.props.data} />}
       </div>
     );
   }
