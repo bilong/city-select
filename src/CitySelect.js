@@ -18,7 +18,7 @@ class CitySelect extends Component {
   }
 
   handleSelectChange(value) {
-    this.onResult([]);
+    this.props.onResult([]);
     this.setState({
       select: value
     });

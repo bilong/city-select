@@ -27,10 +27,10 @@ class CitySelectRadio extends Component {
 class CitySelectHeader extends Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  onChange() {
+  handleChange() {
     this.props.onChange(!this.props.select);
   }
 
@@ -41,8 +41,8 @@ class CitySelectHeader extends Component {
       <div className="city-select-hearder">
         <span>省份\城市：</span>
         <span>
-          <CitySelectRadio select={!select} text={"不限"} onChange={this.onChange} />
-          <CitySelectRadio select={select} text={"自定义"} onChange={this.onChange} />
+          <CitySelectRadio key={!select} select={!select} text={"不限"} onChange={this.handleChange} />
+          <CitySelectRadio key={select} select={select} text={"自定义"} onChange={this.handleChange} />
         </span>
       </div>
     );
