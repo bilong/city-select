@@ -5,6 +5,10 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Available Scripts
 
+Before running the app, you should install the modules:
+
+### `npm install`
+
 In the project directory, you can run:
 
 ### `npm start`

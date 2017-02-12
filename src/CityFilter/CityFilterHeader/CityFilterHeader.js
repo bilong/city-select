@@ -88,7 +88,7 @@ class SearchBar extends Component {
     return (
       <div className="search-bar">
         <span>
-          已选中: <span className="selectedCount">{this.props.selectedCount}</span>个
+          已选中：<span className="selectedCount">{this.props.selectedCount}</span>个
         </span>
         <span>
           <input

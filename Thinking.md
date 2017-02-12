@@ -10,3 +10,17 @@
 8. SearchBar: the search bar
 9. LetterFilter: the letter filter
 10. ToggleFilter: the toggle filter
+
+## Step2: Build A Static Version in React
+
+## Step3: Identify The Minimal (but complete) Representation Of UI State
+
+- searchText
+- currentLetter
+- currentCategory
+
+## Identify Where Your State Should Live
+
+- CityFilter
+
+## Add Inverse Data Flow

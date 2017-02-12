@@ -5,6 +5,7 @@ class FilterModel {
     this.cities = cities;
     this.categories = Utils.getCategories(cities);
     this.onCategoryChange("全选");
+    this.selectedCities = [];
   }
 
   onCategoryChange(category) {
@@ -24,8 +25,12 @@ class FilterModel {
     });
   }
 
-  onToggleSelect(toggle, selectedCities) {
-    return Utils.selectAll(toggle, selectedCities, this.filteredCities);
+  onSelect(cityId, select) {
+    select ? this.selectedCities.push(cityId) : this.selectedCities.splice(this.selectedCities.indexOf(cityId), 1);
+  }
+
+  onToggleSelect(toggle) {
+    this.selectedCities = Utils.selectAll(toggle, this.selectedCities, this.filteredCities);
   }
 
 }

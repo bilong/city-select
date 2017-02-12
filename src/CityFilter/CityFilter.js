@@ -19,7 +19,6 @@ class CityFilter extends Component {
 
     this.state = {
       searchText: "",
-      selectedCities: [],
       currentLetter: "All",
       currentCategory: "全选"
     };
@@ -33,15 +32,6 @@ class CityFilter extends Component {
     });
   }
 
-  handleUserInput(searchText) {
-    this.filterModel.onUserInput(searchText);
-    this.setState({
-      currentLetter: "All",
-      searchText: searchText,
-      currentCategory: "全选"
-    });
-  }
-
   handleLetterChange(letter) {
     this.filterModel.onLetterChange(letter);
     this.setState({
@@ -49,28 +39,33 @@ class CityFilter extends Component {
     });
   }
 
-  handleSelect(cityId, select) {
-    let selectedCities = this.state.selectedCities;
-    select ? selectedCities.push(cityId) : selectedCities.splice(selectedCities.indexOf(cityId), 1);
-    this.props.onResult(selectedCities);
+  handleUserInput(searchText) {
+    this.filterModel.onUserInput(searchText);
     this.setState({
-      selectedCities: selectedCities
+      currentLetter: "All",
+      currentCategory: "全选",
+      searchText: searchText
     });
+  }
+
+  handleSelect(cityId, select) {
+    this.filterModel.onSelect(cityId, select);
+    this.props.onResult(this.filterModel.selectedCities);
+    this.forceUpdate();
   }
 
   handleToggleSelect(toggle) {
-    let selectedCities = this.filterModel.onToggleSelect(toggle, this.state.selectedCities);
-    this.props.onResult(selectedCities);
-    this.setState({
-      selectedCities: selectedCities
-    });
+    this.filterModel.onToggleSelect(toggle);
+    this.props.onResult(this.filterModel.selectedCities);
+    this.forceUpdate();
   }
 
   render() {
-    
+
     let letters = this.filterModel.letters;
     let categories = this.filterModel.categories;
     let filteredCities = this.filterModel.filteredCities;
+    let selectedCities = this.filterModel.selectedCities;
 
     return (
       <div className="city-filter">
@@ -79,7 +74,7 @@ class CityFilter extends Component {
           categories={categories}
           onUserInput={this.handleUserInput}
           onCategoryChange={this.handleCategoryChange}
-          selectedCount={this.state.selectedCities.length}
+          selectedCount={selectedCities.length}
           currentCategory={this.state.currentCategory}
           searchText={this.state.searchText}
         />
@@ -92,7 +87,7 @@ class CityFilter extends Component {
         <CityFilterBody
           onSelect={this.handleSelect}
           filteredCities={filteredCities}
-          selectedCities={this.state.selectedCities}
+          selectedCities={selectedCities}
         />
       </div>
     );
